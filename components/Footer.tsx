@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "./ui/button";
 
@@ -8,13 +9,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           <div className="lg:col-span-4">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-white text-rely-navy flex items-center justify-center font-heading font-bold text-lg leading-none pt-1">
-                R
-              </div>
-              <span className="font-heading font-bold text-xl tracking-tight text-white">
-                Rely Advisory
-              </span>
+            <Link href="/" className="flex items-center mb-6">
+              <Image 
+                src="/logo-by-relly.png" 
+                alt="Rely Advisory Logo" 
+                width={160} 
+                height={40} 
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-cloud-grey/80 mb-8 max-w-sm">
               Better finance operations. Clearer business decisions. Practical
