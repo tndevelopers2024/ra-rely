@@ -91,6 +91,21 @@ The Home SEO title — "Finance operations and advisory support | Rely Advisory
 Group" — is 61 characters against a 60-character guideline. It is the doc's
 approved copy, so it ships verbatim. Shortening it is a client copy decision.
 
+## FAQ answers that are instructions, not answers
+
+Two of the doc's ten FAQ "answers" are directions to the implementer rather
+than anything a visitor can be shown. Both render on `/faq` inside the
+"Awaiting client confirmation — not for publication" treatment, verbatim, and
+**both are excluded from the `FAQPage` structured data** so search engines are
+never handed them as answers.
+
+| Question | The doc's text | Needed |
+|---|---|---|
+| Which systems can Rely support? | "The website should list only verified capability. Initial platforms may include Xero, MYOB, QuickBooks Online, Microsoft Excel, Microsoft 365 and Power BI." | Confirm which platforms are genuinely supported, then write the answer. |
+| Is offshore support used? | "The final website must accurately describe the approved delivery model. If offshore personnel may access client information, this should be disclosed transparently with the relevant security and privacy controls." | Confirm the delivery model and any offshore access, with its security and privacy controls. |
+
+The `FAQPage` schema currently carries 8 of 10 questions for this reason.
+
 ## Content still to be written (not placeholder text)
 
 The eight launch articles are scaffolded from the doc's titles with a

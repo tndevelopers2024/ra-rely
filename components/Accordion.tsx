@@ -3,7 +3,13 @@
 import { useId, useState } from "react";
 import styles from "./Accordion.module.css";
 
-export type AccordionItem = { question: string; answer: string };
+export type AccordionItem = {
+  question: string;
+  answer: string;
+  /** The content doc defers this answer to the client. Rendered as visibly
+   *  unresolved and excluded from FAQ structured data. */
+  pending?: boolean;
+};
 
 type Props = {
   items: AccordionItem[];
@@ -43,7 +49,16 @@ export default function Accordion({ items, headingLevel: Tag = "h3" }: Props) {
               className={styles.panel}
               hidden={!isOpen}
             >
-              <p className={styles.answer}>{item.answer}</p>
+              {item.pending ? (
+                <div className={styles.pending} data-placeholder="true">
+                  <p className={styles.pendingFlag}>
+                    Awaiting client confirmation — not for publication
+                  </p>
+                  <p className={styles.answer}>{item.answer}</p>
+                </div>
+              ) : (
+                <p className={styles.answer}>{item.answer}</p>
+              )}
             </div>
           </div>
         );

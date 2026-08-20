@@ -160,8 +160,53 @@ Every other page ends with its own CTA band and its own doc-specified label.
 - The Home SEO title is 61 characters against the 60-character guideline. It is
   the doc's approved copy and ships verbatim.
 
-## Phase 3 — trust and channel (next)
+## Phase 3 — trust and channel ✅
 
+### Routes
 `/industries`, `/how-we-work`, `/for-accountants`, `/about`, `/faq`.
+
+### New components
+`StackedBlocks` (vertical industry blocks), `ProcessStages` (numbered stage
+with its own bullet list), `PlaceholderBlock` (deferred content, rendered as
+visibly unfinished). `Accordion` gained a per-item `pending` flag.
+
+### Verified
+- Build and lint clean across 17 routes, no `any`
+- Metadata: doc SEO title and description verbatim on all five, one `h1` each,
+  canonicals on the single domain
+- Headings: no skipped levels on any of the 13 pages
+- Links: zero accessible names resolving to two destinations
+- `FAQPage` JSON-LD: 8 of 10 questions, the two unresolved ones excluded
+- Responsive: 13 pages × 4 widths = **52 combinations, zero failures**
+- Reduced motion clean; content present without JS
+
+## Phase 3 decisions
+
+**Industries uses vertical numbered blocks, not a pinned horizontal rail** —
+a rail suits a photo portfolio, not five text blocks, as the brief notes.
+
+**Two FAQ "answers" are implementer instructions, not answers.** "Which systems
+can Rely support?" and "Is offshore support used?" both answer with directions
+to whoever builds the site. Rendering them as customer-facing copy would put
+"The website should list only verified capability" in front of a buyer;
+rewriting them would invent claims about systems and offshore delivery on a
+regulated-adjacent site. Both are kept verbatim inside the visible
+"Awaiting client confirmation" treatment and excluded from the structured data.
+See `PLACEHOLDERS.md`.
+
+**Fixed an ambiguous link name on `/industries`.** The doc's page CTA
+("Discuss your industry and finance challenges") was on both the hero and the
+CTA band but pointing at different routes — one accessible name, two
+destinations, which is the actual WCAG 2.4.4 failure. Both now resolve to
+`/book-a-review`.
+
+**The founder biography stays a placeholder.** No invented experience,
+qualifications or memberships — the doc explicitly defers it.
+
+## Phase 4 — content, tools, legal (next)
+
+`/insights`, `/insights/[slug]` (eight MDX stubs, bodies not written),
+`/finance-health-check`, `/privacy`, `/terms`, plus `sitemap.ts` and
+`robots.ts` once every route exists.
 
 Awaiting sign-off before starting.

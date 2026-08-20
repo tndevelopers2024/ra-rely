@@ -77,3 +77,23 @@
   max-width: 72ch;
   color: var(--ink-muted);
 }
+
+/* Answers the content doc defers to the client — unmistakably unfinished. */
+.pending {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+  margin-bottom: 4px;
+  background: var(--bg-premium);
+  border: 2px dashed var(--hairline-gold);
+  border-radius: var(--radius);
+}
+
+.pendingFlag {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
