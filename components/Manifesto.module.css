@@ -1,0 +1,36 @@
+.manifesto {
+  display: flex;
+  align-items: center;
+  min-height: 78vh;
+  padding: clamp(72px, 10vh, 120px) 0;
+  background: var(--bg-premium);
+}
+
+.eyebrow {
+  margin-bottom: 22px;
+}
+
+.title {
+  margin-bottom: 26px;
+  font-size: clamp(1.6rem, 3.4vw, 2.7rem);
+}
+
+.copy {
+  max-width: 24ch;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(1.35rem, 3.6vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.28;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 821px) {
+  .copy {
+    max-width: 20ch;
+  }
+}
+
+.word {
+  display: inline-block;
+}

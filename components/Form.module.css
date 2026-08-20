@@ -1,0 +1,73 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: flex-start;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px clamp(16px, 2vw, 24px);
+  width: 100%;
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The notice tracks the form on wide screens so it is never scrolled past. */
+.aside {
+  position: sticky;
+  top: 116px;
+}
+
+@media (max-width: 900px) {
+  .aside {
+    position: static;
+    order: -1;
+  }
+}
+
+.formError {
+  color: #a4262c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(30px, 4vw, 52px);
+  background: var(--bg-premium);
+  border-radius: var(--radius);
+}
+
+.successRule {
+  width: 46px;
+}
+
+.successTitle {
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+}
+
+.successBody {
+  max-width: 60ch;
+  color: var(--ink-body);
+}

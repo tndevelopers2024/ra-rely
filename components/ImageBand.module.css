@@ -1,0 +1,14 @@
+.band {
+  overflow: hidden;
+}
+
+.mediaWrap {
+  overflow: hidden;
+  will-change: transform;
+}
+
+.media {
+  width: 100%;
+  height: clamp(240px, 46vh, 520px);
+  object-fit: cover;
+}

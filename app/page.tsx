@@ -1,9 +1,4 @@
-/**
- * PHASE 1 SCAFFOLD — exercises the component library with the approved Home
- * copy (content blueprint, page 01). Phase 2 replaces this with the complete
- * Home page: per-page metadata, the pinned "More than completed transactions"
- * set piece and the image band.
- */
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,8 +8,17 @@ import StepGrid from "@/components/StepGrid";
 import BulletList from "@/components/BulletList";
 import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
+import ImageBand from "@/components/ImageBand";
 import Button from "@/components/Button";
+import { pageMetadata } from "@/lib/metadata";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Finance operations and advisory support | Rely Advisory Group",
+  description:
+    "Improve accounts payable, receivables, finance processes and reporting with practical support for growing Australian businesses.",
+  path: "/",
+});
 
 const PROBLEMS = [
   {
@@ -35,7 +39,7 @@ const PROBLEMS = [
   },
 ];
 
-const SOLUTION_CARDS = [
+const SOLUTIONS = [
   {
     title: "Accounts Payable",
     body: "Create a more controlled, visible and efficient supplier payment process.",
@@ -134,7 +138,7 @@ export default function HomePage() {
           title="Practical finance support built around your business"
         />
         <CardGrid columns={2}>
-          {SOLUTION_CARDS.map((item, i) => (
+          {SOLUTIONS.map((item, i) => (
             <Card key={item.title} index={i} {...item} />
           ))}
         </CardGrid>
@@ -145,7 +149,15 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section surface="cloud" labelledBy="outcomes-heading">
+      {/* TODO: shot required — an Australian SME finance team reviewing a
+          management report on screen in a real workspace. Neutral brand-toned
+          placeholder until the photography is commissioned. */}
+      <ImageBand
+        src="/placeholder-finance-workspace.png"
+        alt="Placeholder for a photograph of an Australian business finance team reviewing management reporting"
+      />
+
+      <Section labelledBy="outcomes-heading">
         <SectionHeading
           id="outcomes-heading"
           eyebrow="The outcome"
@@ -154,7 +166,7 @@ export default function HomePage() {
         <BulletList items={OUTCOMES} />
       </Section>
 
-      <Section labelledBy="process-heading">
+      <Section surface="cloud" labelledBy="process-heading">
         <SectionHeading
           id="process-heading"
           eyebrow="Our approach"
@@ -163,7 +175,7 @@ export default function HomePage() {
         <StepGrid steps={STEPS} />
       </Section>
 
-      <Section surface="cloud" labelledBy="why-heading">
+      <Section labelledBy="why-heading">
         <SectionHeading
           id="why-heading"
           eyebrow="Why Rely"
@@ -172,11 +184,12 @@ export default function HomePage() {
         <BulletList items={WHY} columns={2} />
       </Section>
 
-      <Section>
+      <Section surface="ivory">
         <Callout
           title="Not sure where to begin?"
           body="A free Finance Operations Review identifies immediate pressure points, practical improvements and the most appropriate level of support."
           headingLevel="h2"
+          tone="cloud"
         />
       </Section>
 

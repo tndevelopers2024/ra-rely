@@ -39,7 +39,7 @@ this single constant. Change it in one place; never introduce a second domain
 | **Reversed / knockout logo** | The supplied lockup is navy-and-gold ink. It disappears on navy, so the footer currently uses a typeset wordmark rather than the logo, and the header is white rather than navy. |
 | **Horizontal (landscape) lockup** | The supplied file is a stacked portrait lockup. A slim sticky header can only carry it so large; the header runs taller than ideal to keep it legible. |
 | **Favicon / app icons** | Currently pointing at the full PNG lockup, which will render illegibly at 32px. |
-| **Open Graph image** | No OG image exists yet, so no page declares one. |
+| **Designed Open Graph image** | `og-rely-advisory-group.png` is an interim built from the real logo on the ivory brand surface. A designed social card would serve better. |
 
 `public/logo-rely-advisory-group.png` is the supplied file trimmed of its
 transparent margin — same artwork, no recolouring. The original is retained at
@@ -61,6 +61,35 @@ the site and none may be invented:
 - Any stat counter — the count-up animation is wired to render a
   server-rendered real value, and is simply not used until verified numbers
   are supplied
+
+## Forms are not connected
+
+Both API routes (`/api/book-a-review`, `/api/contact`) validate with the shared
+Zod schema, log, and return 200. **Nothing is delivered anywhere.** A submitted
+form currently reaches no one. Each route carries a
+`TODO: wire to <email/CRM provider>` comment. Choosing the provider is a client
+decision and also a privacy-policy dependency (the policy must name the tools
+actually deployed).
+
+## Form options not specified by the doc
+
+The content doc names these fields but not their choices. The values below are
+structural defaults, not client-approved copy — confirm before launch:
+
+| Field | Values used | Doc says |
+|---|---|---|
+| Number of employees | 1–10, 11–25, 26–50, 51–100, 101–250, More than 250 | "Dropdown" |
+| Enquiry type (`/contact`) | The five areas of interest plus "General enquiry" | "Enquiry type" |
+
+Accounting system (Xero / MYOB / QuickBooks / Other) and Area of interest
+(AP / AR / Process / Reporting / Accountant partnership) are the doc's own
+values, used verbatim.
+
+## SEO title over budget
+
+The Home SEO title — "Finance operations and advisory support | Rely Advisory
+Group" — is 61 characters against a 60-character guideline. It is the doc's
+approved copy, so it ships verbatim. Shortening it is a client copy decision.
 
 ## Content still to be written (not placeholder text)
 

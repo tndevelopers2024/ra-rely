@@ -89,10 +89,79 @@ duplicated.
   labels, not doc copy — the doc supplies one eyebrow per *page*, which the
   hero uses. Flag if you would rather these sections carried no eyebrow.
 
-## Phase 2 — core conversion path (next)
+## Phase 2 — core conversion path ✅
 
+### Routes
 `/`, `/solutions`, `/solutions/accounts-payable`,
 `/solutions/accounts-receivable`, `/solutions/process-improvement`,
-`/solutions/reporting-insights`, `/book-a-review`, `/contact`.
+`/solutions/reporting-insights`, `/book-a-review`, `/contact`,
+plus `app/api/book-a-review/route.ts` and `app/api/contact/route.ts`.
+
+### New components
+`Manifesto` (the one pinned word-by-word set piece), `ImageBand` (full-bleed
+scale + border-radius scrub), `SecurityNotice`, `FormFields`
+(`TextField` / `SelectField` / `TextareaField` / `CheckboxField`),
+`BookReviewForm`, `ContactForm`.
+
+New lib: `lib/metadata.ts` (per-page metadata, one canonical domain),
+`lib/schemas.ts` (Zod schemas shared by client and route).
+
+### Verified
+- Build and lint clean across 12 routes, no `any`
+- **Metadata**: every page carries the doc's SEO title and meta description
+  verbatim, one `h1`, `og:image` (1200×630) and `summary_large_image`
+- **Canonicals**: all eight resolve to `SITE.url` — no second domain
+- **Headings**: no skipped levels on any page
+- **Links**: zero cases of one accessible name pointing at two destinations
+  (nav/footer repeats all resolve to a single href)
+- **Images**: none missing `alt`
+- **Forms**: server-rendered with visible labels on every control
+  (9 fields / 9 labels on `/book-a-review`, 7 / 7 on `/contact`), correct
+  `aria-required` counts, errors via `aria-describedby` + `role="alert"`
+- **API routes**: valid payload → 200; invalid → 400 with per-field messages;
+  malformed body → 400
+- **Responsive**: 8 pages × 4 widths (375/768/1024/1440) measured — all 32
+  combinations report `scrollWidth === viewport`, zero overflowing elements
+- **Reduced motion**: nothing animates, nothing invisible
+- JS disabled: all copy, links and form controls present in the server HTML
+
+## Phase 2 decisions
+
+**The pinned word reveal lives on `/solutions/reporting-insights`**, on the
+"Data → Insight → Recommendation" principle — one block sitewide, as specified.
+It is the better host than Home's "More than completed transactions": that block
+is a heading plus five bullets, while this is a single editorial sentence, which
+is what the effect is for. Gated to >=821px and `no-preference`; the words are
+fully opaque in CSS, so without JS the copy just reads.
+
+**Home's hero is text-led, with the full-bleed image band mid-page.** `Hero`
+supports an optional `image` and the media zoom (1.06 → 1) is implemented, but
+no page passes one: the only available asset is a neutral placeholder, and a
+large abstract block as the homepage's dominant element would misrepresent the
+design. Pass `image` to `Hero` once hero photography exists.
+
+**No CTA band on `/book-a-review` or `/contact`.** Each page ends with its own
+conversion action — the form, submitting as "Book my free review" and "Send
+enquiry" respectively. A band beneath a form pushing to that same form is noise.
+Every other page ends with its own CTA band and its own doc-specified label.
+
+## Phase 2 caveats
+
+- **Forms deliver nowhere yet.** Both routes validate, log and return 200.
+  See `PLACEHOLDERS.md`.
+- **Employee bands and enquiry types are structural defaults**, not client copy
+  — the doc names the fields but not the choices. Listed in `PLACEHOLDERS.md`.
+- **Section eyebrows are still mine, not the doc's** ("The pressure points",
+  "What we deliver", "Governance", "Scope", …). The doc supplies one eyebrow per
+  page, which each hero uses. None makes a claim, but say the word and they come
+  out.
+- `sitemap.ts` and `robots.ts` are deliberately deferred to Phase 4, when every
+  route exists — a sitemap listing unbuilt pages would be wrong.
+- The Home SEO title is 61 characters against the 60-character guideline. It is
+  the doc's approved copy and ships verbatim.
+
+## Phase 3 — trust and channel (next)
+
+`/industries`, `/how-we-work`, `/for-accountants`, `/about`, `/faq`.
 
 Awaiting sign-off before starting.

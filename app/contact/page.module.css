@@ -1,0 +1,42 @@
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 34px);
+  max-width: 900px;
+}
+
+@media (max-width: 700px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline-gold);
+}
+
+.term {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.value {
+  color: var(--ink-body);
+}
+
+/* Unresolved client detail — obviously unfinished, never plausible fake data. */
+.pending {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px dashed var(--hairline-gold);
+  border-radius: 3px;
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+}

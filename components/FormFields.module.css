@@ -1,0 +1,120 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.req {
+  margin-left: 3px;
+  color: var(--accent-strong);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 15px;
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  color: var(--ink-body);
+  font-size: 0.95rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input::placeholder {
+  color: var(--ink-faint);
+}
+
+.input:hover {
+  border-color: var(--hairline-gold);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+  border-color: var(--accent-strong);
+}
+
+.input[aria-invalid="true"] {
+  border-color: #a4262c;
+}
+
+.input:disabled {
+  background: var(--bg-raised);
+  cursor: not-allowed;
+}
+
+.textarea {
+  min-height: 128px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap .input {
+  appearance: none;
+  padding-right: 44px;
+}
+
+.caret {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.checkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* 44px target via the padded label, while the box itself stays visually 20px. */
+.checkbox {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--navy);
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.checkLabel {
+  font-size: 0.9rem;
+  color: var(--ink-body);
+  cursor: pointer;
+}
+
+/* #a4262c on white is 6.2:1 — error text has to clear AA like any other copy. */
+.error {
+  color: #a4262c;
+  font-size: 0.84rem;
+  font-weight: 500;
+}
