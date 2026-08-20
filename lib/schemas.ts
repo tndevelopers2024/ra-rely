@@ -69,3 +69,78 @@ export const contactSchema = z.object({
 
 export type BookReviewValues = z.infer<typeof bookReviewSchema>;
 export type ContactValues = z.infer<typeof contactSchema>;
+
+/* ---------------- Finance Operations Health Check ---------------- */
+
+/** The doc's five response options, in order. */
+export const HEALTH_CHECK_OPTIONS = [
+  "Always",
+  "Usually",
+  "Sometimes",
+  "Rarely",
+  "Not sure",
+] as const;
+
+/** The doc's ten statements, verbatim and in order. */
+export const HEALTH_CHECK_QUESTIONS = [
+  "Supplier invoices are captured in one controlled location.",
+  "Invoice approvals follow a clear and timely process.",
+  "Customer invoices are issued promptly after work or delivery.",
+  "Overdue accounts are followed up consistently.",
+  "Finance responsibilities are documented and understood.",
+  "Key tasks can continue when a team member is absent.",
+  "Monthly reports are delivered on time.",
+  "Management can clearly see near-term cash requirements.",
+  "Reports explain significant movements and expected actions.",
+  "Systems and spreadsheets do not require excessive manual rework.",
+] as const;
+
+/**
+ * Scoring weights and band thresholds are NOT specified by the content doc.
+ * These are structural defaults — confirm with the client before launch.
+ * "Not sure" scores zero deliberately: an absence of visibility is itself a
+ * weak signal, not a neutral one.
+ */
+export const HEALTH_CHECK_WEIGHTS: Record<(typeof HEALTH_CHECK_OPTIONS)[number], number> = {
+  Always: 4,
+  Usually: 3,
+  Sometimes: 2,
+  Rarely: 1,
+  "Not sure": 0,
+};
+
+export const HEALTH_CHECK_MAX = HEALTH_CHECK_QUESTIONS.length * 4;
+
+/** The doc's three indicative bands, wording verbatim. */
+export const HEALTH_CHECK_BANDS = [
+  {
+    min: 30,
+    title: "Strong foundation",
+    body: "Core processes appear controlled. Focus on optimisation, automation and decision insight.",
+  },
+  {
+    min: 18,
+    title: "Functional but vulnerable",
+    body: "Processes operate, but several areas depend on manual effort or individual knowledge.",
+  },
+  {
+    min: 0,
+    title: "Immediate attention recommended",
+    body: "Gaps in control, capacity or visibility may be affecting cash flow and increasing operational risk.",
+  },
+] as const;
+
+export function healthCheckBand(score: number) {
+  return HEALTH_CHECK_BANDS.find((band) => score >= band.min) ?? HEALTH_CHECK_BANDS[2];
+}
+
+export const healthCheckSchema = z.object({
+  fullName: z.string().trim().min(1, "Enter your full name."),
+  workEmail: z.string().trim().email("Enter a valid work email address."),
+  businessName: z.string().trim().optional(),
+  score: z.number().int().min(0).max(HEALTH_CHECK_MAX),
+  band: z.string().trim().min(1),
+  privacyConsent: consent,
+});
+
+export type HealthCheckValues = z.infer<typeof healthCheckSchema>;

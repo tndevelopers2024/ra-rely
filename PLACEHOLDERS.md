@@ -108,9 +108,60 @@ The `FAQPage` schema currently carries 8 of 10 questions for this reason.
 
 ## Content still to be written (not placeholder text)
 
-The eight launch articles are scaffolded from the doc's titles with a
-`TODO: draft` body. Article bodies are **not** to be written without the
-client — they carry commercial and regulatory claims.
+The eight launch articles are scaffolded in `content/insights/*.mdx` from the
+doc's titles, with front-matter and a `TODO: draft` body. Article bodies are
+**not** to be written without the client — they carry commercial and
+regulatory claims.
+
+Every stub is `robots: noindex, follow` and excluded from `sitemap.xml` while
+`status: "draft"`. Flip a file's front-matter to `status: "published"` once its
+body is written and reviewed, and it enters both automatically. Each stub's
+`author` and `reviewed` front-matter are visible placeholders.
+
+**No article body is rendered on any page** — the template shows the doc's
+section structure with a "To be drafted" note, behind an
+"Awaiting client confirmation" banner. No `TODO` text reaches the rendered
+page.
+
+## Featured resources that do not exist
+
+The doc names four featured resources on `/insights`. Only one exists:
+
+| Resource | Status |
+|---|---|
+| Finance Operations Health Check | Built — `/finance-health-check` |
+| The Month-End Readiness Checklist | **Does not exist.** Rendered unlinked and marked "Not yet available". |
+| Debtor Management Playbook | **Does not exist.** Same treatment. |
+| Management Reporting Guide | **Does not exist.** Same treatment. |
+
+They are deliberately not links: a card that looks clickable but leads nowhere,
+or promises a download that cannot be delivered, is a worse failure than an
+honest "not yet available".
+
+## Health check scoring is not specified by the doc
+
+The doc supplies the ten statements, the five response options and the three
+result bands, but **no scoring weights and no band thresholds**. These are
+structural defaults in `lib/schemas.ts` — confirm before launch:
+
+| Response | Weight |
+|---|---|
+| Always | 4 |
+| Usually | 3 |
+| Sometimes | 2 |
+| Rarely | 1 |
+| Not sure | 0 |
+
+| Score (of 40) | Band |
+|---|---|
+| 30–40 | Strong foundation |
+| 18–29 | Functional but vulnerable |
+| 0–17 | Immediate attention recommended |
+
+"Not sure" scores zero deliberately — an absence of visibility is a weak
+signal, not a neutral one. If the client disagrees, that is a one-line change.
+
+The band wording itself is the doc's, verbatim.
 
 ## Legal
 

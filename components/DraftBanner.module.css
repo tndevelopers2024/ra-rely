@@ -1,0 +1,23 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 80ch;
+  padding: clamp(20px, 2.6vw, 30px);
+  background: var(--bg-premium);
+  border: 2px dashed var(--hairline-gold);
+  border-radius: var(--radius);
+}
+
+.label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.body {
+  color: var(--ink-body);
+  font-size: 0.95rem;
+}

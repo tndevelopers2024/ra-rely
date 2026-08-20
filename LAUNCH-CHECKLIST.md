@@ -6,23 +6,30 @@ From the content blueprint, page 18 (internal — not published as a route).
 
 The doc's minimum launch set, mapped to routes:
 
-- [ ] Home — `/`
-- [ ] Solutions landing page — `/solutions`
-- [ ] Accounts Payable — `/solutions/accounts-payable`
-- [ ] Accounts Receivable — `/solutions/accounts-receivable`
-- [ ] Process Improvement — `/solutions/process-improvement`
-- [ ] Reporting and Insights — `/solutions/reporting-insights`
-- [ ] How We Work — `/how-we-work`
-- [ ] For Accountants — `/for-accountants`
-- [ ] About — `/about`
-- [ ] Book a Review — `/book-a-review`
-- [ ] Contact — `/contact`
-- [ ] Privacy Policy — `/privacy`
-- [ ] Terms and Disclaimer — `/terms`
+All built. Every route below renders and is in the sitemap:
 
-`/industries`, `/faq`, `/insights`, `/insights/[slug]` and
-`/finance-health-check` are in scope for the build but sit outside the doc's
-minimum launch set.
+- [x] Home — `/`
+- [x] Solutions landing page — `/solutions`
+- [x] Accounts Payable — `/solutions/accounts-payable`
+- [x] Accounts Receivable — `/solutions/accounts-receivable`
+- [x] Process Improvement — `/solutions/process-improvement`
+- [x] Reporting and Insights — `/solutions/reporting-insights`
+- [x] How We Work — `/how-we-work`
+- [x] For Accountants — `/for-accountants`
+- [x] About — `/about`
+- [x] Book a Review — `/book-a-review`
+- [x] Contact — `/contact`
+- [x] Privacy Policy — `/privacy`
+- [x] Terms and Disclaimer — `/terms`
+
+Also built, beyond the doc's minimum launch set: `/industries`, `/faq`,
+`/insights`, `/insights/[slug]` (eight noindex stubs) and
+`/finance-health-check`.
+
+**Built is not the same as ready to publish.** Every unresolved item in
+`PLACEHOLDERS.md` still applies — the domain, contact details, founder
+biography, two FAQ answers, three featured resources, all eight article bodies,
+the health-check scoring, and legal review of `/privacy` and `/terms`.
 
 ## Pre-publication approvals (client)
 

@@ -71,3 +71,20 @@
 .linked:hover .cue {
   transform: translateX(5px);
 }
+
+/* A resource the content doc names but which does not exist yet. */
+.pending {
+  border-style: dashed;
+  border-color: var(--hairline-gold);
+  background: var(--bg-premium);
+}
+
+.pendingFlag {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}

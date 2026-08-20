@@ -203,10 +203,73 @@ destinations, which is the actual WCAG 2.4.4 failure. Both now resolve to
 **The founder biography stays a placeholder.** No invented experience,
 qualifications or memberships — the doc explicitly defers it.
 
-## Phase 4 — content, tools, legal (next)
+## Phase 4 — content, tools, legal ✅
 
-`/insights`, `/insights/[slug]` (eight MDX stubs, bodies not written),
-`/finance-health-check`, `/privacy`, `/terms`, plus `sitemap.ts` and
-`robots.ts` once every route exists.
+### Routes
+`/insights`, `/insights/[slug]` (eight prerendered stubs),
+`/finance-health-check`, `/privacy`, `/terms`, plus `app/sitemap.ts`,
+`app/robots.ts` and `app/api/health-check/route.ts`.
 
-Awaiting sign-off before starting.
+### New components
+`HealthCheck` (the ten-question assessment), `DraftBanner`, `LegalSections`.
+`Card` gained a `pending` variant; `Button` gained `onClick`.
+
+New lib: `lib/insights.ts` — reads front-matter from `content/insights/*.mdx`
+at build time. No MDX runtime is installed: every body is still `TODO: draft`,
+so there is nothing to render. Wire one when real bodies land.
+
+### Verified
+- Build and lint clean across 25 routes, no `any`
+- **Health check exercised end to end**, not assumed: all Always → 40/40
+  "Strong foundation"; all Sometimes → 20/40 "Functional but vulnerable";
+  all Not sure → 0/40 "Immediate attention recommended". All three of the
+  doc's bands are reachable. Focus moves to the result. An incomplete
+  assessment shows an alert and does **not** reveal a result.
+- Health check markup: 10 `fieldset`/`legend` pairs, 50 native radios
+  (arrow-key groups work for free), a `role="progressbar"`, all ten
+  statements verbatim
+- `/api/health-check`: valid → 200; invalid → 400 with per-field errors
+- Article stubs: `noindex, follow`, correct canonical, one `h1`,
+  **zero `TODO` strings reach the rendered page**
+- `sitemap.xml`: 17 URLs, all on `SITE.url`, zero draft articles
+- `robots.txt`: allows `/`, disallows `/api/`, points at the sitemap
+- Headings: no skipped levels across all 18 checked pages
+- Links: zero accessible names resolving to two destinations
+- Responsive: 18 pages × 4 widths = **72 combinations, zero failures**
+
+## Phase 4 decisions
+
+**The on-screen result is never gated.** The doc asks for lead capture on
+"Receive my result and recommendations"; the score and band appear as soon as
+the tenth answer lands, and the email form sits below it as an optional extra.
+Gating a result the visitor has already earned is the dark pattern the brief
+rules out.
+
+**Three of the four featured resources do not exist**, so they are rendered
+unlinked and marked "Not yet available" rather than as links to nowhere.
+
+**Article stubs are noindex and out of the sitemap** while their front-matter
+says `status: "draft"`. Publishing eight empty article pages would be worse
+than not shipping them. Flipping one to `status: "published"` puts it in both.
+
+**No MDX runtime installed.** The brief asks for MDX stubs with front-matter
+and a `TODO: draft` body — that exists. Installing a rendering pipeline for
+bodies that are all placeholders would add dependencies to render nothing.
+`lib/insights.ts` reads the front-matter; the body pipeline is a small,
+well-isolated addition when there is prose to render.
+
+**Legal pages stay indexable** behind their draft banner. They are in the
+doc's minimum launch set, and the banner is the safeguard. If you would rather
+they were noindex until legal review completes, that is a one-line change.
+
+## Remaining before launch
+
+Everything in `PLACEHOLDERS.md`: production domain, contact details, founder
+biography, two FAQ answers, three featured resources, eight article bodies,
+health-check scoring confirmation, form delivery wiring, and legal review of
+`/privacy` and `/terms`.
+
+Not yet done: Lighthouse run against a production build, and an axe/WAVE pass
+against the dev server. The scripted checks above cover heading order, link
+ambiguity, alt text, overflow and reduced motion, but they are not a
+substitute for either tool.

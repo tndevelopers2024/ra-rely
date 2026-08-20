@@ -1,0 +1,219 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.4vw, 44px);
+}
+
+/* ---------- progress ---------- */
+.progress {
+  position: sticky;
+  top: 92px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 0;
+  background: var(--bg);
+}
+
+.progressText {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.track {
+  height: 3px;
+  background: var(--hairline);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fill {
+  width: var(--progress, 0%);
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.4s var(--ease);
+}
+
+/* ---------- questions ---------- */
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.4vw, 30px);
+  list-style: none;
+  counter-reset: none;
+}
+
+.question {
+  padding-top: 22px;
+  border-top: 1px solid var(--hairline);
+}
+
+.fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legend {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  max-width: 68ch;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.num {
+  color: var(--gold);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option {
+  position: relative;
+  display: inline-flex;
+}
+
+/* The input stays in the a11y tree and keeps arrow-key group behaviour;
+   the label is the visible, 44px-tall target. */
+.radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.optionLabel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--ink-body);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.optionLabel:hover {
+  border-color: var(--hairline-gold);
+}
+
+.radio:checked + .optionLabel {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.radio:focus-visible + .optionLabel {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+/* ---------- result ---------- */
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(28px, 3.6vw, 46px);
+  background: var(--bg-premium);
+  border-radius: var(--radius);
+}
+
+.result:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.resultRule {
+  width: 46px;
+}
+
+.resultLabel {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.resultTitle {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.resultBody {
+  max-width: 62ch;
+  color: var(--ink-body);
+}
+
+.score {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.caveat {
+  max-width: 62ch;
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+}
+
+/* ---------- lead capture ---------- */
+.capture {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.4vw, 48px);
+  align-items: start;
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--hairline-gold);
+}
+
+@media (max-width: 900px) {
+  .capture {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.captureTitle {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+}
+
+.captureBody {
+  max-width: 58ch;
+  margin: 10px 0 22px;
+  color: var(--ink-muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  max-width: 520px;
+}
+
+.form > * {
+  width: 100%;
+}
+
+.form > button {
+  width: auto;
+}
+
+.error {
+  color: #a4262c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

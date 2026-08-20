@@ -8,6 +8,7 @@ type Props = {
   variant?: Variant;
   type?: "button" | "submit";
   disabled?: boolean;
+  onClick?: () => void;
   className?: string;
   /** Use when the visible label is not unique across the page. */
   ariaLabel?: string;
@@ -25,6 +26,7 @@ export default function Button({
   variant = "solid",
   type = "button",
   disabled,
+  onClick,
   className,
   ariaLabel,
 }: Props) {
@@ -39,7 +41,13 @@ export default function Button({
   }
 
   return (
-    <button type={type} className={cls} disabled={disabled} aria-label={ariaLabel}>
+    <button
+      type={type}
+      className={cls}
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
       {children}
     </button>
   );

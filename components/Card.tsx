@@ -10,6 +10,9 @@ type Props = {
   /** Stagger index — drives --reveal-delay. */
   index?: number;
   headingLevel?: "h3" | "h4";
+  /** Resource named by the content doc that does not exist yet. Rendered
+   *  unlinked and visibly unavailable rather than as a dead promise. */
+  pending?: boolean;
 };
 
 export default function Card({
@@ -18,12 +21,14 @@ export default function Card({
   href,
   index = 0,
   headingLevel: Tag = "h3",
+  pending,
 }: Props) {
   const delay = `${Math.min(index, 5) * 0.08}s`;
 
   return (
     <article
-      className={`${styles.card} ${href ? styles.linked : ""}`}
+      className={`${styles.card} ${href ? styles.linked : ""} ${pending ? styles.pending : ""}`}
+      data-placeholder={pending ? "true" : undefined}
       data-reveal
       style={{ "--reveal-delay": delay } as React.CSSProperties}
     >
@@ -37,6 +42,9 @@ export default function Card({
         )}
       </Tag>
       <p className={styles.body}>{body}</p>
+      {pending && (
+        <p className={styles.pendingFlag}>Not yet available</p>
+      )}
       {href && (
         <span className={styles.cue} aria-hidden="true">
           →
