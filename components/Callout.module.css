@@ -1,0 +1,30 @@
+.callout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(30px, 4vw, 52px);
+  border-radius: var(--radius);
+}
+
+.ivory {
+  background: var(--bg-premium);
+}
+
+.cloud {
+  background: var(--bg-raised);
+}
+
+.rule {
+  width: 46px;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+}
+
+.body {
+  max-width: 68ch;
+  color: var(--ink-body);
+  font-size: clamp(1rem, 1.3vw, 1.05rem);
+}

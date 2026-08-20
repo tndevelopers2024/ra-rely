@@ -1,23 +1,338 @@
-@import "tailwindcss";
+/* ==========================================================================
+   Rely Advisory Group — design system
+   Tokens and shared utilities. Modules reference these variables only;
+   never introduce ad-hoc hex values, font stacks or spacing magic numbers.
+   Palette and type are approved brand direction (content blueprint, page 00).
+   ========================================================================== */
 
-@theme {
-  --color-rely-navy: #0B1B4D;
-  --color-advisory-gold: #C4A35A;
-  --color-warm-ivory: #F5F2EA;
-  --color-cloud-grey: #F4F6F9;
-  --color-charcoal: #263247;
+:root {
+  --maxw: 1280px;
+  --pad: clamp(20px, 4.5vw, 56px);
 
-  --font-heading: var(--font-montserrat), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
+  /* ---- brand palette (page 00) ---- */
+  --navy: #0b1b4d; /* primary headings, nav, buttons, footer */
+  --gold: #c4a35a; /* highlights, rules, icons, selected headings */
+  --ivory: #f5f2ea; /* section backgrounds, premium callouts */
+  --cloud: #f4f6f9; /* cards, forms, supporting sections */
+  --charcoal: #263247; /* body copy */
+
+  /* ---- semantic indirection ----
+     Modules use these, not the raw brand names, so a second theme can be
+     added later without touching every module. */
+  --bg: #ffffff;
+  --bg-raised: var(--cloud);
+  --bg-premium: var(--ivory);
+  --ink: var(--navy);
+  --ink-body: var(--charcoal);
+
+  /* Charcoal at 0.72 alpha, not the 0.66 first sketched: 0.66 lands at
+     4.47:1 on --ivory, just under AA for body text. 0.72 clears every
+     surface we use it on — 5.37:1 on white, 4.96:1 on cloud, 4.80:1 on
+     ivory. Verified before shipping, per the contrast gate. */
+  --ink-muted: rgba(38, 50, 71, 0.72);
+
+  /* Decorative only — never carries text that must be read. */
+  --ink-faint: rgba(38, 50, 71, 0.38);
+
+  /* Gold is ~2.3:1 on white: rules, icons and small marks only.
+     Navy carries the text weight; gold carries the decoration. */
+  --accent: var(--gold);
+  --accent-strong: var(--navy);
+
+  --hairline: rgba(11, 27, 77, 0.12);
+  --hairline-gold: rgba(196, 163, 90, 0.55);
+
+  --radius: 4px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smoothing */
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
-  background-color: #ffffff;
-  color: var(--color-charcoal);
-  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink-body);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: var(--color-rely-navy);
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- layout ---------- */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+section {
+  position: relative;
+}
+
+.section-pad {
+  padding: clamp(88px, 12vh, 150px) 0;
+}
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 14px 22px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* ---------- editorial type ---------- */
+.display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+
+/* centred sections drop the leading rule */
+.eyebrow-plain::before {
+  display: none;
+}
+
+/* ---------- gold hairline — the sitewide texture ---------- */
+.gold-rule {
+  height: 1px;
+  border: 0;
+  background: var(--hairline-gold);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 15px 30px;
+  border-radius: var(--radius);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: transform 0.35s var(--ease), background 0.35s ease,
+    color 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.btn-solid {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* Gold hover keeps navy text: white on gold is only 2.3:1. */
+.btn-solid:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-line {
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+}
+
+.btn-line:hover {
+  border-color: var(--gold);
+  color: var(--accent-strong);
+}
+
+/* on navy surfaces (CTA band, footer) */
+.btn-invert {
+  background: #fff;
+  color: var(--navy);
+}
+
+.btn-invert:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-invert:focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------- underline link ---------- */
+.u-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  padding-bottom: 4px;
+}
+
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0.28);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+.u-link:hover::after {
+  transform: scaleX(1);
+}
+
+.u-link span[aria-hidden] {
+  transition: transform 0.35s var(--ease);
+}
+
+.u-link:hover span[aria-hidden] {
+  transform: translateX(5px);
+}
+
+/* ---------- scroll reveals ----------
+   IntersectionObserver adds .is-in. Gated on html.has-reveal, set by the
+   effect, so content is never hidden without JavaScript. */
+html.has-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform, opacity;
+}
+
+html.has-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.has-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+::selection {
+  background: var(--navy);
+  color: #fff;
 }

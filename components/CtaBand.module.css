@@ -1,0 +1,50 @@
+.band {
+  background: var(--navy);
+  padding: clamp(72px, 10vh, 118px) 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.rule {
+  width: 54px;
+}
+
+.title {
+  max-width: 20ch;
+  color: #fff;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+}
+
+.body {
+  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* Outline button reading on navy rather than white. */
+.ghost {
+  border-color: rgba(255, 255, 255, 0.34);
+  color: #fff;
+}
+
+.ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.ghost:focus-visible {
+  outline-color: #fff;
+}

@@ -1,0 +1,79 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 84ch;
+  border-top: 1px solid var(--hairline);
+}
+
+.item {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* The heading tag carries semantics; the button inside carries the control. */
+.heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  min-height: 44px;
+  padding: 22px 4px;
+  text-align: left;
+}
+
+.question {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Gold plus/minus mark, drawn in CSS. */
+.icon {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: var(--gold);
+  transition: transform 0.35s var(--ease), opacity 0.35s ease;
+}
+
+.icon::before {
+  width: 16px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+
+.icon::after {
+  width: 2px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+}
+
+.icon[data-open="true"]::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.panel {
+  padding: 0 4px 26px;
+}
+
+.answer {
+  max-width: 72ch;
+  color: var(--ink-muted);
+}

@@ -1,0 +1,296 @@
+/* White header: the supplied logo is navy-and-gold ink (on a transparent
+   ground), so it cannot read on a navy bar. Navy carries the CTA band and
+   footer instead. A reversed logo asset would let this flip — see
+   PLACEHOLDERS.md. */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* The gold hairline that runs under the bar — the sitewide texture. */
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--hairline-gold);
+  opacity: 0.5;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 92px;
+}
+
+.brand {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Stacked portrait lockup, trimmed of its transparent margin. A slim bar
+   can only carry it so large, so the header runs a little taller than usual.
+   TODO: replace with a horizontal lockup when the client supplies one. */
+.logo {
+  width: auto;
+  height: 64px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 34px);
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.5vw, 24px);
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 6px 2px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.link:hover,
+.link[data-active="true"] {
+  color: var(--accent-strong);
+}
+
+.link[data-active="true"] {
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
+
+.caret {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.3s var(--ease);
+}
+
+.caret[data-open="true"] {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.group {
+  position: relative;
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -18px;
+  min-width: 286px;
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 44px rgba(11, 27, 77, 0.13);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.28s ease, transform 0.28s var(--ease),
+    visibility 0.28s;
+}
+
+.submenu[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.subLink {
+  display: block;
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  font-size: 0.86rem;
+  color: var(--ink-body);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.subLink:hover,
+.subLink[aria-current="page"] {
+  background: var(--bg-raised);
+  color: var(--accent-strong);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.phone {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.cta {
+  padding: 13px 24px;
+  font-size: 0.68rem;
+}
+
+/* ---------- toggle (mobile only) ---------- */
+.toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -8px;
+}
+
+.bars,
+.bars::before,
+.bars::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  transition: transform 0.3s var(--ease), opacity 0.2s ease;
+}
+
+.bars::before,
+.bars::after {
+  content: "";
+  position: absolute;
+}
+
+.bars::before {
+  transform: translateY(-7px);
+}
+
+.bars::after {
+  transform: translateY(7px);
+}
+
+.bars[data-open="true"] {
+  background: transparent;
+}
+
+.bars[data-open="true"]::before {
+  transform: rotate(45deg);
+}
+
+.bars[data-open="true"]::after {
+  transform: rotate(-45deg);
+}
+
+/* ---------- below 960px the same list becomes a panel ---------- */
+@media (max-width: 1100px) {
+  /* The panel below takes flex-basis: 100%, so the bar has to be allowed to
+     wrap — without this it forces the container wider than the viewport and
+     every section on the page gets clipped. */
+  .bar {
+    flex-wrap: wrap;
+  }
+
+  .toggle {
+    display: inline-flex;
+    position: relative;
+    order: 3;
+  }
+
+  .nav {
+    order: 4;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.4s var(--ease), visibility 0.4s;
+  }
+
+  .header[data-open="true"] .nav {
+    max-height: 80vh;
+    overflow-y: auto;
+    visibility: visible;
+    padding-bottom: 24px;
+  }
+
+  .list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .link {
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 2px;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 0.95rem;
+  }
+
+  .link[data-active="true"] {
+    box-shadow: none;
+  }
+
+  /* Dropdown becomes an inline disclosure — no second copy of the markup. */
+  .submenu {
+    position: static;
+    min-width: 0;
+    max-height: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    transform: none;
+    transition: max-height 0.35s var(--ease);
+  }
+
+  .submenu[data-open="true"] {
+    max-height: 420px;
+    padding: 6px 0 10px;
+  }
+
+  .subLink {
+    padding-left: 18px;
+    border-left: 1px solid var(--hairline-gold);
+    border-radius: 0;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-top: 22px;
+  }
+
+  .phone {
+    text-align: center;
+  }
+
+  .cta {
+    width: 100%;
+  }
+}

@@ -1,0 +1,73 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 2.6vw, 34px);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  transition: border-color 0.35s ease, transform 0.35s var(--ease);
+}
+
+/* A gold hairline is the sitewide texture — it marks the card's top edge. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.linked:hover {
+  border-color: var(--hairline-gold);
+  transform: translateY(-3px);
+}
+
+.linked:hover::before,
+.linked:focus-within::before {
+  opacity: 1;
+}
+
+.title {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 1.075rem;
+  letter-spacing: -0.005em;
+}
+
+/* Stretches the title link across the whole card so the pointer target is
+   the full surface while the accessible name stays the title alone. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.body {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.cue {
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--gold);
+  font-size: 1rem;
+  transition: transform 0.35s var(--ease);
+}
+
+.linked:hover .cue {
+  transform: translateX(5px);
+}

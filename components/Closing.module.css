@@ -1,0 +1,137 @@
+.footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.72);
+  padding: clamp(64px, 9vh, 104px) 0 40px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(44px, 6vh, 72px);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 2fr);
+  gap: clamp(36px, 5vw, 72px);
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wordmark {
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 0.01em;
+}
+
+.rule {
+  width: 46px;
+}
+
+.trust {
+  max-width: 34ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+}
+
+@media (max-width: 900px) {
+  .cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.colLabel {
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.colList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  font-size: 0.88rem;
+}
+
+.link {
+  display: inline-block;
+  padding: 3px 0;
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--gold);
+}
+
+.link:focus-visible {
+  outline-color: #fff;
+}
+
+.plain {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Unresolved client detail — rendered so it reads as obviously unfinished. */
+.placeholder {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px dashed rgba(196, 163, 90, 0.75);
+  border-radius: 3px;
+  color: var(--gold);
+  font-size: 0.84rem;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.copy {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  list-style: none;
+  font-size: 0.82rem;
+}

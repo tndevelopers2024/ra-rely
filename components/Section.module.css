@@ -1,0 +1,25 @@
+/* Section rhythm: white → ivory → cloud keeps long pages readable.
+   Ivory is reserved for callouts and premium moments, not a default. */
+
+.white {
+  background: var(--bg);
+}
+
+.cloud {
+  background: var(--bg-raised);
+}
+
+.ivory {
+  background: var(--bg-premium);
+}
+
+.navy {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.navy :global(h1),
+.navy :global(h2),
+.navy :global(h3) {
+  color: #fff;
+}
