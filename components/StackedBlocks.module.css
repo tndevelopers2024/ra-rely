@@ -22,12 +22,15 @@
   }
 }
 
+/* Navy, not gold. These numerals are visible text a sighted reader uses to
+   follow the sequence. Gold #C4A35A is 2.4:1 on white and 2.2:1 on cloud —
+   below even the 3:1 large-text threshold. Gold stays on the rule above. */
 .num {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   font-weight: 600;
   line-height: 1.1;
-  color: var(--gold);
+  color: var(--accent-strong);
 }
 
 .content {

@@ -164,6 +164,9 @@ section {
   line-height: 1.08;
 }
 
+/* Navy text, gold rule. The eyebrow is real text at 11px, so it cannot be
+   gold: #C4A35A measures 2.4:1 on white and 2.2:1 on cloud, well under AA.
+   Navy carries the text weight, gold carries the decoration. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -172,7 +175,7 @@ section {
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .eyebrow::before {
@@ -186,6 +189,19 @@ section {
 /* centred sections drop the leading rule */
 .eyebrow-plain::before {
   display: none;
+}
+
+/* ---------- screen-reader-only ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- gold hairline — the sitewide texture ---------- */

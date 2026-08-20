@@ -70,8 +70,11 @@
   color: var(--ink);
 }
 
+/* Body-size inline text, not large display type — so navy, not gold. The
+   large numerals on StepGrid / StackedBlocks / ProcessStages stay gold, which
+   the brand direction allows for display sizes. */
 .num {
-  color: var(--gold);
+  color: var(--accent-strong);
 }
 
 .options {

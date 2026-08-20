@@ -61,12 +61,17 @@ export default function Manifesto({ eyebrow, title, text, id }: Props) {
         <h2 id={id} className={`display ${styles.title}`}>
           {title}
         </h2>
-        <p className={styles.copy} aria-label={text}>
-          {text.split(" ").map((word, i) => (
-            <span key={`${word}-${i}`} className={styles.word} aria-hidden="true">
-              {word}&nbsp;
-            </span>
-          ))}
+        {/* aria-label is prohibited on <p>, so the sentence is carried by a
+            visually hidden span and the animated words are hidden from AT. */}
+        <p className={styles.copy}>
+          <span className="sr-only">{text}</span>
+          <span aria-hidden="true">
+            {text.split(" ").map((word, i) => (
+              <span key={`${word}-${i}`} className={styles.word}>
+                {word}&nbsp;
+              </span>
+            ))}
+          </span>
         </p>
       </div>
     </section>

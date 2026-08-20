@@ -269,7 +269,53 @@ biography, two FAQ answers, three featured resources, eight article bodies,
 health-check scoring confirmation, form delivery wiring, and legal review of
 `/privacy` and `/terms`.
 
-Not yet done: Lighthouse run against a production build, and an axe/WAVE pass
-against the dev server. The scripted checks above cover heading order, link
-ambiguity, alt text, overflow and reduced motion, but they are not a
-substitute for either tool.
+## Verification pass ✅ (against a production build)
+
+### Lighthouse — desktop, `npm run start`
+
+| Page | Perf | A11y | Best practices | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| `/` | 100 | 100 | 100 | 100 | 0.6 s | 0 | 0 ms |
+| `/solutions/accounts-payable` | 100 | 100 | 100 | 100 | 0.6 s | 0 | 0 ms |
+
+Comfortably inside the budgets (LCP < 2.5s, CLS < 0.1, INP < 200ms).
+
+### axe-core 4.13, WCAG 2.0/2.1/2.2 A + AA, all 18 pages
+
+**0 violations. 0 critical or serious.**
+
+### Three real defects this pass caught
+
+The scripted checks in earlier phases covered heading order, link ambiguity,
+alt text, overflow and reduced motion — they did not catch any of these.
+
+1. **The eyebrow was gold text at 11px.** `#C4A35A` measures 2.4:1 on white
+   and 2.2:1 on cloud, far under AA. This contradicted the brand direction's
+   own rule and my Phase 1 contrast check missed it — I verified `--ink-muted`
+   and did not re-check `.eyebrow`. Now navy text with the gold rule retained.
+2. **The numbered blocks used gold numerals** (`StepGrid`, `StackedBlocks`,
+   `ProcessStages`). Being `aria-hidden` does not exempt visible text a sighted
+   reader uses to follow a sequence, and 2.4:1 is under even the 3:1
+   large-text threshold. Now navy.
+3. **`aria-label` on a `<p>`** in `Manifesto` — ARIA prohibits naming a `<p>`
+   with no role. The sentence now sits in a `.sr-only` span with the animated
+   words hidden from assistive tech.
+
+Gold now appears only as rules, ticks, arrows, carets and borders, or as text
+on navy (6.8:1). That is the "navy carries the text weight, gold carries the
+decoration" rule, actually enforced.
+
+### A note on measuring contrast with animation
+
+A first axe run reported ~30 contrast violations that were **artifacts**:
+`data-reveal` elements caught mid-transition read as washed-out (a card at
+0.62 opacity measures `#9fa4ae` rather than `#636b7b`), and the Manifesto's
+words sit at 0.12 opacity at the start of their scrub. Re-running with
+`prefers-reduced-motion` forced settles every reveal and measures the at-rest
+state, which is what contrast should be judged on. The three defects above are
+what survived that.
+
+### Still not done
+
+No manual screen-reader pass (VoiceOver/NVDA) and no real-device testing.
+Automated tooling does not substitute for either.
